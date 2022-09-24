@@ -2,18 +2,6 @@
 *.py[cod]
 __python__/*
 
-# do NOT track tox's testing folder
-.tox
-
-# do NOT track coverage files/folders
-.coverage
-coverage_html
-
-# do NOT track compiled language files
-*.mo
-*.pot
-
-/settings/run
 /venv
 
 .idea
