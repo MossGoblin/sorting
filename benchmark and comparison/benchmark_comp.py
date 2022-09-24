@@ -3,24 +3,16 @@ import pandas as pd
 from timeit import timeit
 from progress.bar import PixelBar
 import os
+from toolbox import lists as ls
 
 
-runs = 1000
+runs = 100
 min = 0
 max = 100
 size = 1000
 reset_output_folder = False
 
-algorithm_stmts = [
-    ('selection_sort', 'sc.selection_sort(bucket)'),
-    ('insertion_sort', 'sc.insertion_sort(bucket)'),
-    ('heap_sort', 'sc.heap_sort(bucket)'),
-    ('merge_sort', 'sc.merge_sort(bucket)'),
-    ('quick_sort', 'sc.quick_sort(bucket)'),
-    ('radix_sort', 'sc.radix_sort(bucket)'),
-    ('crystal_sort', 'tc.crystal_sort(bucket)'),
-    ('push_sort', 'tc.push_sort(bucket)'),
-]
+algorithm_stmts = ls.algorithm_stmts
 
 
 def _get_rand_set(min: int, max: int, size: int):
@@ -66,8 +58,10 @@ def main():
         results[algorithm_name] = {}
         results[algorithm_name][time_field_name] = 0
         run_measurements = 0.0
-        max_algorithm_name_length = _get_max_algorithm_name_length(algorithm_stmts)
-        bucket_bar = PixelBar(algorithm_name.ljust(max_algorithm_name_length,' '), max=len(buckets))
+        max_algorithm_name_length = _get_max_algorithm_name_length(
+            algorithm_stmts)
+        bucket_bar = PixelBar(algorithm_name.ljust(
+            max_algorithm_name_length, ' '), max=len(buckets))
         for bucket in buckets:
             measurement = timeit(
                 algorithm_stmt,
