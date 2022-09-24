@@ -4,7 +4,9 @@ from timeit import timeit
 from progress.bar import PixelBar
 import os
 from toolbox import lists as ls
-
+# Path fix
+import sys
+sys.path.append('../')
 
 runs = 100
 min = 0
@@ -65,8 +67,8 @@ def main():
         for bucket in buckets:
             measurement = timeit(
                 algorithm_stmt,
-                setup="""import sort_collection as sc
-import test_collection as tc""",
+                setup="""from algorithms import sort_collection as sc
+from algorithms import test_collection as tc""",
                 globals={"bucket": bucket},
                 number=1)
             run_measurements += measurement
